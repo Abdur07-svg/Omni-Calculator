@@ -308,30 +308,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Background Blobs and Parallax
-    const calculatorBody = document.querySelector('.calculator');
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth - 0.5;
-        const y = e.clientY / window.innerHeight - 0.5;
-        
-        document.documentElement.style.setProperty('--mouse-x', x);
-        document.documentElement.style.setProperty('--mouse-y', y);
-        
-        const rotateX = y * 15; 
-        const rotateY = -x * 15;
-        if (calculatorBody) {
-            calculatorBody.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }
-    });
-
-    document.addEventListener('mouseleave', () => {
-        if (calculatorBody) {
-            calculatorBody.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-        }
-    });
+    // Background Blobs and Parallax (Removed parallax effect)
 
     // Keyboard Support
     window.addEventListener('keydown', (e) => {
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+            if (e.key === 'Enter') {
+                const activeElem = document.activeElement;
+                const container = activeElem.closest('.form-box') || activeElem.closest('.calc-view') || activeElem.closest('.calculator');
+                if (container) {
+                    const buttons = Array.from(container.querySelectorAll('button'));
+                    const calcBtn = buttons.find(btn => {
+                        const id = btn.id ? btn.id.toLowerCase() : '';
+                        const text = btn.innerText ? btn.innerText.toLowerCase() : '';
+                        return (id.includes('calc') && id.includes('btn')) || text.includes('calculate') || text.includes('solve');
+                    });
+                    
+                    if (calcBtn) {
+                        e.preventDefault();
+                        calcBtn.click();
+                    }
+                }
+            }
+            return;
+        }
         const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '=', 'Enter', 'Backspace', 'Escape', 'Delete', '+', '-', '*', '/', '%', '(', ')', '^'];
         if (allowedKeys.includes(e.key)) {
             playClickSound();
@@ -439,9 +439,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputAgeTarget = document.getElementById('age-target');
     const ageResultContainer = document.getElementById('age-result-container');
     
-    // Set default target date to today
+    // Set default target date to today (MM/DD/YYYY)
     const today = new Date();
-    inputAgeTarget.value = today.toISOString().split('T')[0];
+    inputAgeTarget.value = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+    
+    if (typeof flatpickr !== 'undefined') {
+        flatpickr(".date-input", {
+            dateFormat: "m/d/Y",
+            allowInput: true
+        });
+    }
     
     if (btnCalcAge) {
         btnCalcAge.addEventListener('click', () => {

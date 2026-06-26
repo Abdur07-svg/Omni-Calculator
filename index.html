@@ -38,42 +38,76 @@
                     <div class="current-operand" id="current-operand">0</div>
                 </div>
                 <div class="keypad-wrapper">
-                    <div class="keypad basic-keypad" id="basic-keypad" style="width: 100%;">
+                    <div class="keypad basic-keypad" id="basic-keypad" style="width: 100%; grid-template-columns: repeat(4, 1fr);">
+                        <!-- Row 1 -->
+                        <button class="btn btn-action" data-action="mc">mc</button>
+                        <button class="btn btn-action" data-action="m-plus">m+</button>
+                        <button class="btn btn-action" data-action="m-minus">m-</button>
+                        <button class="btn btn-action" data-action="mr">mr</button>
+
+                        <!-- Row 2 -->
+                        <button class="btn btn-action" data-action="clear" style="color: #ef4444;">AC</button>
+                        <button class="btn btn-action" data-action="delete" style="color: #ef4444; display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+                                <line x1="18" y1="9" x2="12" y2="15"></line>
+                                <line x1="12" y1="9" x2="18" y2="15"></line>
+                            </svg>
+                        </button>
+                        <button class="btn btn-action" data-action="sign">+/-</button>
+                        <button class="btn btn-operator" data-operator="÷" data-action="append">÷</button>
+
+                        <!-- Row 3 -->
                         <button class="btn btn-number" data-number="7">7</button>
                         <button class="btn btn-number" data-number="8">8</button>
                         <button class="btn btn-number" data-number="9">9</button>
-                        <button class="btn btn-operator" data-operator="+" data-action="append">+</button>
-                        <button class="btn btn-action" data-action="delete"><i class="fas fa-backspace"></i></button>
+                        <button class="btn btn-operator" data-operator="×" data-action="append">×</button>
 
+                        <!-- Row 4 -->
                         <button class="btn btn-number" data-number="4">4</button>
                         <button class="btn btn-number" data-number="5">5</button>
                         <button class="btn btn-number" data-number="6">6</button>
                         <button class="btn btn-operator" data-operator="-" data-action="append">-</button>
-                        <button class="btn btn-action" data-action="ans">Ans</button>
 
+                        <!-- Row 5 -->
                         <button class="btn btn-number" data-number="1">1</button>
                         <button class="btn btn-number" data-number="2">2</button>
                         <button class="btn btn-number" data-number="3">3</button>
-                        <button class="btn btn-operator" data-operator="×" data-action="append">×</button>
-                        <button class="btn btn-action" data-action="m-plus">M+</button>
+                        <button class="btn btn-operator" data-operator="+" data-action="append">+</button>
 
+                        <!-- Row 6 -->
+                        <button class="btn btn-action" data-action="percent">%</button>
                         <button class="btn btn-number" data-number="0">0</button>
                         <button class="btn btn-number" data-number=".">.</button>
-                        <button class="btn btn-action" data-action="sign">±</button>
-                        <button class="btn btn-operator" data-operator="÷" data-action="append">÷</button>
-                        <button class="btn btn-action" data-action="m-minus">M-</button>
-
-                        <button class="btn btn-action" data-action="clear" style="font-size: 1.2rem;">AC</button>
-                        <button class="btn btn-equal" data-action="calculate" style="grid-column: span 3;">=</button>
-                        <button class="btn btn-action" data-action="mr">MR</button>
+                        <button class="btn btn-equal" data-action="calculate">=</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="search-container" style="width: 100%; max-width: 600px; margin: 0 auto 30px auto; padding: 0 20px;">
+        <div class="search-container" style="width: 100%; max-width: 600px; margin: 0 auto 40px auto; padding: 0 20px;">
             <div class="input-group" style="position: relative; margin: 0;">
-                <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.1rem;"></i>
-                <input type="text" id="dashboard-search" class="custom-input" placeholder="Search calculators (e.g. BMI, GPA, Math)..." style="padding-left: 45px; border-radius: 20px; font-size: 1.1rem; height: 50px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); transition: color 0.3s ease; z-index: 2;">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="dashboard-search" placeholder="Search calculators (e.g. BMI, GPA, Loan...)" 
+                    style="
+                    width: 100%; 
+                    height: 55px;
+                    padding-left: 20px; 
+                    padding-right: 55px;
+                    border-radius: 28px; 
+                    font-size: 1.1rem; 
+                    background: var(--calc-bg);
+                    border: 1px solid var(--calc-border);
+                    color: var(--text-primary);
+                    box-shadow: var(--calc-shadow);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    transition: all 0.3s ease;
+                    outline: none;"
+                    onfocus="this.style.boxShadow='0 8px 30px rgba(56, 189, 248, 0.25)'; this.style.borderColor='#38bdf8'; this.previousElementSibling.style.color='#38bdf8'; this.style.transform='translateY(-2px)';"
+                    onblur="this.style.boxShadow='var(--calc-shadow)'; this.style.borderColor='var(--calc-border)'; this.previousElementSibling.style.color='var(--text-secondary)'; this.style.transform='translateY(0)';">
             </div>
         </div>
 
@@ -90,9 +124,9 @@
                 <ul class="calculator-list">
                     <li><a href="financial/mortgage-calculator.html" class="active-link">Mortgage Calculator</a></li>
                     <li><a href="financial/loan-calculator.html" class="active-link">Loan Calculator</a></li>
-                    <li><a href="financial/auto-loan-calculator.html">Auto Loan Calculator</a></li>
-                    <li><a href="financial/interest-calculator.html">Interest Calculator</a></li>
-                    <li><a href="financial/payment-calculator.html">Payment Calculator</a></li>
+                    <li><a href="financial/auto-loan-calculator.html" class="active-link">Auto Loan Calculator</a></li>
+                    <li><a href="financial/interest-calculator.html" class="active-link">Interest Calculator</a></li>
+                    <li><a href="financial/payment-calculator.html" class="active-link">Payment Calculator</a></li>
                     <li><a href="financial/retirement-calculator.html">Retirement Calculator</a></li>
                     <li><a href="financial/amortization-calculator.html">Amortization Calculator</a></li>
                     <li><a href="financial/investment-calculator.html">Investment Calculator</a></li>

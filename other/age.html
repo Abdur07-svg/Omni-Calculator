@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 </head>
 <body>
     <div class="background-elements">
@@ -30,12 +32,12 @@
                 <div class="form-box">
                     <div class="input-group">
                         <label>Date of Birth</label>
-                        <input type="date" id="age-dob" class="custom-input">
+                        <input type="text" id="age-dob" class="custom-input date-input" placeholder="MM/DD/YYYY">
                     </div>
                     
                     <div class="input-group">
                         <label>Calculate age at</label>
-                        <input type="date" id="age-target" class="custom-input">
+                        <input type="text" id="age-target" class="custom-input date-input" placeholder="MM/DD/YYYY">
                     </div>
                     
                     <button id="calc-age-btn" class="action-btn">Calculate Age</button>
@@ -57,6 +59,7 @@
 
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/script.js"></script>
     <script src="../js/age.js"></script>
 </body>

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 </head>
 <body>
     <div class="background-elements">
@@ -36,11 +38,11 @@
                     <div id="mode-difference">
                         <div class="input-group">
                             <label>Start Date</label>
-                            <input type="date" id="date-start" class="custom-input">
+                            <input type="text" id="date-start" class="custom-input date-input" placeholder="MM/DD/YYYY">
                         </div>
                         <div class="input-group">
                             <label>End Date</label>
-                            <input type="date" id="date-end" class="custom-input">
+                            <input type="text" id="date-end" class="custom-input date-input" placeholder="MM/DD/YYYY">
                         </div>
                     </div>
 
@@ -48,7 +50,7 @@
                     <div id="mode-add-sub" style="display: none;">
                         <div class="input-group">
                             <label>Start Date</label>
-                            <input type="date" id="date-base" class="custom-input">
+                            <input type="text" id="date-base" class="custom-input date-input" placeholder="MM/DD/YYYY">
                         </div>
                         <div class="input-group" style="display: flex; gap: 10px;">
                             <select id="date-op" class="custom-input" style="flex: 1;">
@@ -86,6 +88,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/script.js"></script>
     <script src="../js/date.js"></script>
 </body>

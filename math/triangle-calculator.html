@@ -22,39 +22,53 @@
                     <p>Calculate area, perimeter, and angles</p>
                 </div>
                 
-                <div class="form-box">
-                    <div class="input-group">
-                        <label>Calculation Method</label>
-                        <select id="tri-method" class="custom-input">
-                            <option value="base-height">Base & Height</option>
-                            <option value="3-sides">3 Sides</option>
+                <div class="form-box" style="padding-top: 30px;">
+                    <div style="position: relative; width: 360px; height: 260px; margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center;">
+                        <!-- Triangle SVG -->
+                        <svg width="200" height="173.2" viewBox="0 0 200 173.2" style="position: absolute; top: 40px; left: 80px; overflow: visible;">
+                            <polygon points="100,0 200,173.2 0,173.2" fill="none" stroke="var(--text-primary)" stroke-width="4"/>
+                            
+                            <!-- Arcs -->
+                            <path d="M 85 26 A 30 30 0 0 0 115 26" fill="none" stroke="var(--calc-accent)" stroke-width="1.5"/>
+                            <path d="M 30 173.2 A 30 30 0 0 0 15 147.2" fill="none" stroke="var(--calc-accent)" stroke-width="1.5"/>
+                            <path d="M 170 173.2 A 30 30 0 0 1 185 147.2" fill="none" stroke="var(--calc-accent)" stroke-width="1.5"/>
+                            
+                            <!-- Labels inside -->
+                            <text x="100" y="45" fill="var(--calc-accent)" font-size="20" font-family="Outfit" text-anchor="middle">C</text>
+                            <text x="30" y="155" fill="var(--calc-accent)" font-size="20" font-family="Outfit" text-anchor="middle">A</text>
+                            <text x="170" y="155" fill="var(--calc-accent)" font-size="20" font-family="Outfit" text-anchor="middle">B</text>
+                            
+                            <!-- Side labels -->
+                            <text x="65" y="95" fill="#22c55e" font-size="14" font-family="Outfit" font-weight="500" text-anchor="middle">side b</text>
+                            <text x="135" y="95" fill="#22c55e" font-size="14" font-family="Outfit" font-weight="500" text-anchor="middle">side a</text>
+                            <text x="100" y="162" fill="#22c55e" font-size="14" font-family="Outfit" font-weight="500" text-anchor="middle">side c</text>
+                        </svg>
+
+                        <!-- Angle C Input (Top) -->
+                        <input type="number" id="tri-angle-c" class="custom-input" style="position: absolute; top: -5px; left: 140px; width: 80px; text-align: center; padding: 10px;" placeholder="&deg;">
+
+                        <!-- Side B Input (Left) -->
+                        <input type="number" id="tri-side-b" class="custom-input" style="position: absolute; top: 80px; left: -10px; width: 80px; text-align: center; padding: 10px;">
+
+                        <!-- Side A Input (Right) -->
+                        <input type="number" id="tri-side-a" class="custom-input" style="position: absolute; top: 80px; left: 290px; width: 80px; text-align: center; padding: 10px;">
+
+                        <!-- Angle A Input (Bottom Left) -->
+                        <input type="number" id="tri-angle-a" class="custom-input" style="position: absolute; top: 190px; left: -10px; width: 80px; text-align: center; padding: 10px;" placeholder="&deg;">
+
+                        <!-- Angle B Input (Bottom Right) -->
+                        <input type="number" id="tri-angle-b" class="custom-input" style="position: absolute; top: 190px; left: 290px; width: 80px; text-align: center; padding: 10px;" placeholder="&deg;">
+
+                        <!-- Side C Input (Bottom Center) -->
+                        <input type="number" id="tri-side-c" class="custom-input" style="position: absolute; top: 225px; left: 140px; width: 80px; text-align: center; padding: 10px;">
+                    </div>
+
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <label style="font-size: 1.1rem;">Angle Unit:</label>
+                        <select id="angle-unit" class="custom-input" style="width: auto; padding: 10px;">
+                            <option value="degree">degree &deg;</option>
+                            <option value="radian">radian rad</option>
                         </select>
-                    </div>
-
-                    <div id="inputs-base-height" style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <div class="input-group" style="flex: 1; margin: 0;">
-                            <label>Base</label>
-                            <input type="number" id="tri-base" class="custom-input" placeholder="0">
-                        </div>
-                        <div class="input-group" style="flex: 1; margin: 0;">
-                            <label>Height</label>
-                            <input type="number" id="tri-height" class="custom-input" placeholder="0">
-                        </div>
-                    </div>
-
-                    <div id="inputs-3-sides" style="display: none; gap: 10px; margin-bottom: 15px;">
-                        <div class="input-group" style="flex: 1; margin: 0;">
-                            <label>Side A</label>
-                            <input type="number" id="tri-a" class="custom-input" placeholder="0">
-                        </div>
-                        <div class="input-group" style="flex: 1; margin: 0;">
-                            <label>Side B</label>
-                            <input type="number" id="tri-b" class="custom-input" placeholder="0">
-                        </div>
-                        <div class="input-group" style="flex: 1; margin: 0;">
-                            <label>Side C</label>
-                            <input type="number" id="tri-c" class="custom-input" placeholder="0">
-                        </div>
                     </div>
 
                     <button id="calc-tri-btn" class="action-btn">Calculate</button>

@@ -7,11 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainResult = document.getElementById('date-main-result');
     const detailsResult = document.getElementById('date-details');
 
-    // Set today as default
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('date-start').value = today;
-    document.getElementById('date-end').value = today;
-    document.getElementById('date-base').value = today;
+    // Set today as default (MM/DD/YYYY)
+    const todayObj = new Date();
+    const todayStr = `${todayObj.getMonth() + 1}/${todayObj.getDate()}/${todayObj.getFullYear()}`;
+    document.getElementById('date-start').value = todayStr;
+    document.getElementById('date-end').value = todayStr;
+    document.getElementById('date-base').value = todayStr;
+
+    if (typeof flatpickr !== 'undefined') {
+        flatpickr(".date-input", {
+            dateFormat: "m/d/Y",
+            allowInput: true
+        });
+    }
 
     calcType.addEventListener('change', () => {
         if (calcType.value === 'difference') {

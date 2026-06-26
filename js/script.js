@@ -290,6 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (action === 'percent') appendStr('%');
                 else if (action === 'sign') appendStr('(-');
                 else if (action === 'ans') appendStr('Ans');
+                else if (action === 'mc') {
+                    memory = 0;
+                }
                 else if (action === 'm-plus') {
                     if (displayStr !== 'Error') {
                         try { calculate(); } catch(e){}
@@ -311,30 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Background Blobs and Parallax
-    const calculatorBody = document.querySelector('.calculator');
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth - 0.5;
-        const y = e.clientY / window.innerHeight - 0.5;
-        
-        document.documentElement.style.setProperty('--mouse-x', x);
-        document.documentElement.style.setProperty('--mouse-y', y);
-        
-        const rotateX = y * 15; 
-        const rotateY = -x * 15;
-        if (calculatorBody) {
-            calculatorBody.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }
-    });
-
-    document.addEventListener('mouseleave', () => {
-        if (calculatorBody) {
-            calculatorBody.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-        }
-    });
+    // Background Blobs and Parallax (Removed parallax effect)
 
     // Keyboard Support
     window.addEventListener('keydown', (e) => {
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+            return;
+        }
         const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '=', 'Enter', 'Backspace', 'Escape', 'Delete', '+', '-', '*', '/', '%', '(', ')', '^'];
         if (allowedKeys.includes(e.key)) {
             playClickSound();
@@ -572,3 +558,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Fix for mobile back-button (bfcache): remove page-exit animation when page is restored
+window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+        const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
+        if (wrapper) {
+            wrapper.classList.remove('page-exit');
+        }
+    }
+});
+
+// Global Enter-to-Calculate listener (Capture phase to run before plugins like Flatpickr)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const activeElem = document.activeElement;
+        if (activeElem && (activeElem.tagName === 'INPUT' || activeElem.tagName === 'TEXTAREA')) {
+            const container = activeElem.closest('.form-box') || activeElem.closest('.calc-view') || activeElem.closest('.calculator') || activeElem.closest('.calculator-wrapper');
+            if (container) {
+                const buttons = Array.from(container.querySelectorAll('button'));
+                const calcBtn = buttons.find(btn => {
+                    const id = btn.id ? btn.id.toLowerCase() : '';
+                    const text = btn.innerText ? btn.innerText.toLowerCase() : '';
+                    return (id.includes('calc') && id.includes('btn')) || text.includes('calculate') || text.includes('solve');
+                });
+                
+                if (calcBtn) {
+                    // Slight delay to allow plugins to update input values
+                    setTimeout(() => {
+                        calcBtn.click();
+                    }, 50);
+                }
+            }
+        }
+    }
+}, true);
