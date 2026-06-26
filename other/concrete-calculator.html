@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 420px;">
+
+            <div id="concrete-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>Concrete Volume Calculator</h2>
+                    <p>Calculate yards, meters, and bags of concrete</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Length</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="concrete-length" class="custom-input" style="flex: 2;" placeholder="0">
+                            <select id="concrete-length-unit" class="custom-input" style="flex: 1;">
+                                <option value="ft">Feet</option>
+                                <option value="m">Meters</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Width</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="concrete-width" class="custom-input" style="flex: 2;" placeholder="0">
+                            <select id="concrete-width-unit" class="custom-input" style="flex: 1;">
+                                <option value="ft">Feet</option>
+                                <option value="m">Meters</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Depth / Thickness</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="concrete-depth" class="custom-input" style="flex: 2;" placeholder="0">
+                            <select id="concrete-depth-unit" class="custom-input" style="flex: 1;">
+                                <option value="in">Inches</option>
+                                <option value="ft">Feet</option>
+                                <option value="cm">cm</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="calc-concrete-btn" class="action-btn">Calculate Volume</button>
+                </div>
+                
+                <div class="result-container" id="concrete-result-container" style="display: none;">
+                    <div class="age-main" id="concrete-main-result" style="font-size: 2rem;">
+                        Result
+                    </div>
+                    <div class="age-details" id="concrete-details">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/concrete.js"></script>
+</body>
+</html>

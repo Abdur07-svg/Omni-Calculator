@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        
+        
+        <div class="calculator">
+            <!-- App Navigation -->
+
+            <!-- Age Calculator View -->
+            <div id="age-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>Age Calculator</h2>
+                    <p>Calculate your exact age</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="age-dob" class="custom-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Calculate age at</label>
+                        <input type="date" id="age-target" class="custom-input">
+                    </div>
+                    
+                    <button id="calc-age-btn" class="action-btn">Calculate Age</button>
+                </div>
+                
+                <div class="result-container" id="age-result-container" style="display: none;">
+                    <div class="age-main" id="age-main-result">
+                        <span id="age-years">0</span> years 
+                        <span id="age-months">0</span> months 
+                        <span id="age-days">0</span> days
+                    </div>
+                    <div class="age-details">
+                        <p>Total Months: <span id="age-total-months">0</span></p>
+                        <p>Total Weeks: <span id="age-total-weeks">0</span></p>
+                        <p>Total Days: <span id="age-total-days">0</span></p>
+                    </div>
+                </div>
+            </div> <!-- End Age View -->
+
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/age.js"></script>
+</body>
+</html>

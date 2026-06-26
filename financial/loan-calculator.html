@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        
+        
+        <div class="calculator">
+
+            <div class="calc-view active">
+                <div class="calc-header">
+                    <h2>Loan Calculator</h2>
+                    <p>Calculate personal or auto loan payments</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Loan Amount ($)</label>
+                        <input type="number" id="loan-amount" placeholder="e.g. 15000" class="custom-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Loan Term (Months)</label>
+                        <input type="number" id="loan-term" placeholder="e.g. 60" class="custom-input" value="60">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" placeholder="e.g. 7.5" class="custom-input" step="0.1">
+                    </div>
+                    
+                    <button id="calc-loan-btn" class="action-btn">Calculate Loan</button>
+                </div>
+                
+                <div class="result-container" id="loan-result-container" style="display: none;">
+                    <div class="age-main">
+                        $<span id="monthly-payment">0</span> <span style="font-size: 1rem; color: var(--text-secondary); font-weight: normal;">/ month</span>
+                    </div>
+                    <div class="age-details" style="margin-top: 15px;">
+                        <p>Total Interest: <span id="total-interest">$0</span></p>
+                        <p style="border-top: 1px solid var(--calc-border); padding-top: 10px; margin-top: 10px;">Total Repayment: <span id="total-cost">$0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/loan.js"></script>
+</body>
+</html>

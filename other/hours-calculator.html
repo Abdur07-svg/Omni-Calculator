@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hours Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator">
+
+            <div id="hours-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>Hours Calculator</h2>
+                    <p>Calculate work hours and timesheets</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Start Time</label>
+                        <input type="time" id="hours-start" class="custom-input" value="09:00">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>End Time</label>
+                        <input type="time" id="hours-end" class="custom-input" value="17:00">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Break Deduction (Minutes)</label>
+                        <input type="number" id="hours-break" class="custom-input" value="30" min="0">
+                    </div>
+                    
+                    <button id="calc-hours-btn" class="action-btn">Calculate Hours</button>
+                </div>
+                
+                <div class="result-container" id="hours-result-container" style="display: none;">
+                    <div class="age-main" id="hours-main-result" style="font-size: 1.5rem;">
+                        0h 0m
+                    </div>
+                    <div class="age-details" id="hours-details">
+                        <!-- Details will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/hours.js"></script>
+</body>
+</html>

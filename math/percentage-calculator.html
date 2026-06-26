@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 420px;">
+
+            <div class="calc-view active">
+                <div class="calc-header">
+                    <h2>Percentage Calculator</h2>
+                    <p>Calculate percentages, changes, and fractions</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Calculation Type</label>
+                        <select id="pct-type" class="custom-input">
+                            <option value="1">What is X% of Y?</option>
+                            <option value="2">X is what percent of Y?</option>
+                            <option value="3">Percentage change from X to Y</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                        <div class="input-group" style="flex: 1; margin: 0;">
+                            <label id="label-x">X Value</label>
+                            <input type="number" id="val-x" class="custom-input" placeholder="0">
+                        </div>
+                        <div class="input-group" style="flex: 1; margin: 0;">
+                            <label id="label-y">Y Value</label>
+                            <input type="number" id="val-y" class="custom-input" placeholder="0">
+                        </div>
+                    </div>
+
+                    <button id="calc-pct-btn" class="action-btn">Calculate</button>
+                </div>
+                
+                <div class="result-container" id="pct-result-container" style="display: none;">
+                    <div class="age-main" id="pct-main-result" style="font-size: 2.5rem; color: var(--calc-accent); margin-bottom: 5px; overflow-wrap: break-word;">
+                        0
+                    </div>
+                    <div id="pct-sentence" style="color: var(--text-secondary); font-size: 1rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/percentage.js"></script>
+</body>
+</html>

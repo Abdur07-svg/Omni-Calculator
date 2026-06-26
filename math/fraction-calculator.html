@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 420px;">
+
+            <div class="calc-view active">
+                <div class="calc-header">
+                    <h2>Fraction Calculator</h2>
+                    <p>Add, subtract, multiply, and divide fractions</p>
+                </div>
+                
+                <div class="form-box">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                        
+                        <!-- Fraction 1 -->
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                            <input type="number" id="n1" class="custom-input" style="width: 70px; text-align: center; padding: 10px;" placeholder="1">
+                            <div style="height: 2px; width: 100%; background-color: var(--text-primary);"></div>
+                            <input type="number" id="d1" class="custom-input" style="width: 70px; text-align: center; padding: 10px;" placeholder="2">
+                        </div>
+
+                        <!-- Operator -->
+                        <select id="frac-op" class="custom-input" style="width: 70px; text-align: center; font-size: 1.5rem; padding: 5px; height: 50px;">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                            <option value="*">×</option>
+                            <option value="/">÷</option>
+                        </select>
+
+                        <!-- Fraction 2 -->
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                            <input type="number" id="n2" class="custom-input" style="width: 70px; text-align: center; padding: 10px;" placeholder="1">
+                            <div style="height: 2px; width: 100%; background-color: var(--text-primary);"></div>
+                            <input type="number" id="d2" class="custom-input" style="width: 70px; text-align: center; padding: 10px;" placeholder="2">
+                        </div>
+                    </div>
+                    
+                    <button id="calc-frac-btn" class="action-btn">Calculate</button>
+                </div>
+                
+                <div class="result-container" id="frac-result-container" style="display: none;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+                        <span style="font-size: 2rem; color: var(--text-primary);">=</span>
+                        <div id="frac-result" style="display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 1.8rem; font-weight: bold; color: var(--calc-accent);">
+                            <span id="res-n">1</span>
+                            <div style="height: 3px; width: 100%; background-color: var(--calc-accent);"></div>
+                            <span id="res-d">1</span>
+                        </div>
+                        <span id="res-mixed" style="font-size: 1.5rem; color: var(--text-secondary); margin-left: 10px;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/fraction.js"></script>
+</body>
+</html>

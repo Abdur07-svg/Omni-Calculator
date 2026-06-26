@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .course-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .course-row input, .course-row select {
+            margin: 0;
+            padding: 10px 8px;
+            font-size: 0.85rem;
+        }
+        .course-name-input { flex: 2; }
+        .course-credits { flex: 1; text-align: center; }
+        .course-grade { flex: 1.2; padding: 10px 4px; }
+        .remove-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 420px;">
+
+            <div id="gpa-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>GPA Calculator</h2>
+                    <p>Calculate your semester or cumulative GPA</p>
+                </div>
+                
+                <div class="form-box">
+                    <div id="courses-container">
+                        <!-- Rows injected here by JS -->
+                    </div>
+                    <button id="add-course-btn" class="action-btn" style="background: var(--bg-tertiary); color: var(--text-primary); margin-bottom: 15px;"><i class="fas fa-plus"></i> Add Course</button>
+                    <button id="calc-gpa-btn" class="action-btn">Calculate GPA</button>
+                </div>
+                
+                <div class="result-container" id="gpa-result-container" style="display: none;">
+                    <div class="age-main" id="gpa-main-result" style="font-size: 2.5rem; color: #22c55e;">
+                        0.00
+                    </div>
+                    <div class="age-details" id="gpa-details">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/gpa.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Deviation Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 450px;">
+            <div class="calc-view active">
+                <div class="calc-header">
+                    <h2>Standard Deviation</h2>
+                    <p>Enter data values separated by commas or spaces</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Data Set</label>
+                        <textarea id="std-data" class="custom-input" rows="4" placeholder="e.g. 5, 10.5, 15, 20" style="resize: none; font-family: inherit;"></textarea>
+                    </div>
+
+                    <button id="calc-std-btn" class="action-btn">Calculate</button>
+                </div>
+                
+                <div class="result-container" id="std-result-container" style="display: none; padding: 15px;">
+                    <div class="age-details" id="std-details" style="text-align: left; padding: 0;">
+                        <!-- Results injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/standard-deviation.js"></script>
+</body>
+</html>

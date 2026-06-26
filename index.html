@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="dashboard-wrapper">
+        <div class="top-controls" style="max-width: 1200px; margin: 0 auto; width: 100%; justify-content: flex-end;">
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                <label for="theme-switch" class="theme-switch-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="dashboard-header">
+            <h1>Omni Calculator</h1>
+            <p>Your all-in-one calculation hub</p>
+        </div>
+
+        <div class="calculator-wrapper" style="margin-bottom: 30px;">
+            <div class="calculator" style="margin: 0 auto;">
+                <div class="display">
+                    <div class="previous-operand" id="previous-operand"></div>
+                    <div class="current-operand" id="current-operand">0</div>
+                </div>
+                <div class="keypad-wrapper">
+                    <div class="keypad basic-keypad" id="basic-keypad" style="width: 100%;">
+                        <button class="btn btn-number" data-number="7">7</button>
+                        <button class="btn btn-number" data-number="8">8</button>
+                        <button class="btn btn-number" data-number="9">9</button>
+                        <button class="btn btn-operator" data-operator="+" data-action="append">+</button>
+                        <button class="btn btn-action" data-action="delete"><i class="fas fa-backspace"></i></button>
+
+                        <button class="btn btn-number" data-number="4">4</button>
+                        <button class="btn btn-number" data-number="5">5</button>
+                        <button class="btn btn-number" data-number="6">6</button>
+                        <button class="btn btn-operator" data-operator="-" data-action="append">-</button>
+                        <button class="btn btn-action" data-action="ans">Ans</button>
+
+                        <button class="btn btn-number" data-number="1">1</button>
+                        <button class="btn btn-number" data-number="2">2</button>
+                        <button class="btn btn-number" data-number="3">3</button>
+                        <button class="btn btn-operator" data-operator="×" data-action="append">×</button>
+                        <button class="btn btn-action" data-action="m-plus">M+</button>
+
+                        <button class="btn btn-number" data-number="0">0</button>
+                        <button class="btn btn-number" data-number=".">.</button>
+                        <button class="btn btn-action" data-action="sign">±</button>
+                        <button class="btn btn-operator" data-operator="÷" data-action="append">÷</button>
+                        <button class="btn btn-action" data-action="m-minus">M-</button>
+
+                        <button class="btn btn-action" data-action="clear" style="font-size: 1.2rem;">AC</button>
+                        <button class="btn btn-equal" data-action="calculate" style="grid-column: span 3;">=</button>
+                        <button class="btn btn-action" data-action="mr">MR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-container" style="width: 100%; max-width: 600px; margin: 0 auto 30px auto; padding: 0 20px;">
+            <div class="input-group" style="position: relative; margin: 0;">
+                <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.1rem;"></i>
+                <input type="text" id="dashboard-search" class="custom-input" placeholder="Search calculators (e.g. BMI, GPA, Math)..." style="padding-left: 45px; border-radius: 20px; font-size: 1.1rem; height: 50px;">
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Financial Calculators -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon" style="color: #22c55e;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2 class="category-title" style="color: #22c55e;">Financial Calculators</h2>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <ul class="calculator-list">
+                    <li><a href="financial/mortgage-calculator.html" class="active-link">Mortgage Calculator</a></li>
+                    <li><a href="financial/loan-calculator.html" class="active-link">Loan Calculator</a></li>
+                    <li><a href="financial/auto-loan-calculator.html">Auto Loan Calculator</a></li>
+                    <li><a href="financial/interest-calculator.html">Interest Calculator</a></li>
+                    <li><a href="financial/payment-calculator.html">Payment Calculator</a></li>
+                    <li><a href="financial/retirement-calculator.html">Retirement Calculator</a></li>
+                    <li><a href="financial/amortization-calculator.html">Amortization Calculator</a></li>
+                    <li><a href="financial/investment-calculator.html">Investment Calculator</a></li>
+                    <li><a href="financial/inflation-calculator.html">Inflation Calculator</a></li>
+                    <li><a href="financial/finance-calculator.html">Finance Calculator</a></li>
+                    <li><a href="financial/income-tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="financial/compound-interest-calculator.html" class="active-link">Compound Interest Calculator</a></li>
+                    <li><a href="financial/salary-calculator.html">Salary Calculator</a></li>
+                    <li><a href="financial/interest-rate-calculator.html">Interest Rate Calculator</a></li>
+                    <li><a href="financial/sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                </ul>
+            </div>
+
+            <!-- Fitness & Health -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon" style="color: #22c55e;">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h2 class="category-title" style="color: #22c55e;">Fitness & Health Calculators</h2>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <ul class="calculator-list">
+                    <li><a href="fitness/bmi.html" class="active-link">BMI Calculator</a></li>
+                    <li><a href="fitness/calorie-calculator.html">Calorie Calculator</a></li>
+                    <li><a href="fitness/body-fat-calculator.html">Body Fat Calculator</a></li>
+                    <li><a href="fitness/bmr-calculator.html">BMR Calculator</a></li>
+                    <li><a href="fitness/ideal-weight-calculator.html">Ideal Weight Calculator</a></li>
+                    <li><a href="fitness/pace-calculator.html">Pace Calculator</a></li>
+                    <li><a href="fitness/pregnancy-calculator.html">Pregnancy Calculator</a></li>
+                    <li><a href="fitness/pregnancy-conception.html">Pregnancy Conception</a></li>
+                    <li><a href="fitness/due-date-calculator.html">Due Date Calculator</a></li>
+                </ul>
+            </div>
+
+            <!-- Math Calculators -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon" style="color: #22c55e;">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h2 class="category-title" style="color: #22c55e;">Math Calculators</h2>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <ul class="calculator-list">
+                    <li><a href="math/math.html" class="active-link">Scientific Calculator</a></li>
+                    <li><a href="math/fraction-calculator.html" class="active-link">Fraction Calculator</a></li>
+                    <li><a href="math/percentage-calculator.html" class="active-link">Percentage Calculator</a></li>
+                    <li><a href="math/random-number-generator.html" class="active-link">Random Number Generator</a></li>
+                    <li><a href="math/triangle-calculator.html" class="active-link">Triangle Calculator</a></li>
+                    <li><a href="math/standard-deviation.html" class="active-link">Standard Deviation</a></li>
+                </ul>
+            </div>
+
+            <!-- Other Calculators -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon" style="color: #22c55e;">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h2 class="category-title" style="color: #22c55e;">Other Calculators</h2>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <ul class="calculator-list">
+                    <li><a href="other/age.html" class="active-link">Age Calculator</a></li>
+                    <li><a href="other/date-calculator.html" class="active-link">Date Calculator</a></li>
+                    <li><a href="other/time-calculator.html" class="active-link">Time Calculator</a></li>
+                    <li><a href="other/hours-calculator.html" class="active-link">Hours Calculator</a></li>
+                    <li><a href="other/gpa-calculator.html" class="active-link">GPA Calculator</a></li>
+                    <li><a href="other/grade-calculator.html" class="active-link">Grade Calculator</a></li>
+                    <li><a href="other/concrete-calculator.html" class="active-link">Concrete Calculator</a></li>
+                    <li><a href="other/subnet-calculator.html" class="active-link">Subnet Calculator</a></li>
+                    <li><a href="other/password-generator.html" class="active-link">Password Generator</a></li>
+                    <li><a href="other/conversion-calculator.html" class="active-link">Conversion Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- We still include script.js to handle the theme toggle -->
+    <script src="js/script.js"></script>
+</body>
+</html>

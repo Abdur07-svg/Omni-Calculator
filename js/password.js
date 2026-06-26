@@ -1,0 +1,66 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const lengthSlider = document.getElementById('password-length');
+    const lengthVal = document.getElementById('length-val');
+    const chkUpper = document.getElementById('inc-uppercase');
+    const chkLower = document.getElementById('inc-lowercase');
+    const chkNums = document.getElementById('inc-numbers');
+    const chkSyms = document.getElementById('inc-symbols');
+    const generateBtn = document.getElementById('generate-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const passwordDisplay = document.getElementById('password-display');
+
+    const chars = {
+        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        lower: 'abcdefghijklmnopqrstuvwxyz',
+        numbers: '0123456789',
+        symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-='
+    };
+
+    lengthSlider.addEventListener('input', () => {
+        lengthVal.textContent = lengthSlider.value;
+    });
+
+    function generatePassword() {
+        let charset = '';
+        if (chkUpper.checked) charset += chars.upper;
+        if (chkLower.checked) charset += chars.lower;
+        if (chkNums.checked) charset += chars.numbers;
+        if (chkSyms.checked) charset += chars.symbols;
+
+        if (charset === '') {
+            passwordDisplay.textContent = 'Select at least one option';
+            passwordDisplay.style.color = '#ef4444';
+            return;
+        }
+
+        let password = '';
+        const length = parseInt(lengthSlider.value);
+        const randomValues = new Uint32Array(length);
+        window.crypto.getRandomValues(randomValues);
+
+        for (let i = 0; i < length; i++) {
+            password += charset[randomValues[i] % charset.length];
+        }
+
+        passwordDisplay.textContent = password;
+        passwordDisplay.style.color = 'var(--calc-accent)';
+    }
+
+    generateBtn.addEventListener('click', generatePassword);
+
+    copyBtn.addEventListener('click', () => {
+        const text = passwordDisplay.textContent;
+        if (text && text !== 'Click generate' && text !== 'Select at least one option') {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check" style="color: #22c55e;"></i>';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHtml;
+                }, 1500);
+            });
+        }
+    });
+
+    // Generate on load
+    generatePassword();
+});

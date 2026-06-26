@@ -1,0 +1,101 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle functionality
+    const themeSwitch = document.getElementById('theme-switch');
+    const htmlElement = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        htmlElement.setAttribute('data-theme', 'light');
+        if (themeSwitch) themeSwitch.checked = true;
+    }
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', () => {
+                if (themeSwitch.checked) {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+    }
+
+    const soundBtn = document.getElementById('sound-toggle-btn');
+    const soundIcon = document.getElementById('sound-icon');
+    let soundEnabled = true;
+    soundBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+    });
+
+    // Loan Calculator Logic
+    const calcBtn = document.getElementById('calc-loan-btn');
+    const resultContainer = document.getElementById('loan-result-container');
+
+    const loanAmountInput = document.getElementById('loan-amount');
+    const loanTermInput = document.getElementById('loan-term');
+    const interestRateInput = document.getElementById('interest-rate');
+
+    const monthlyPaymentEl = document.getElementById('monthly-payment');
+    const totalInterestEl = document.getElementById('total-interest');
+    const totalCostEl = document.getElementById('total-cost');
+
+    function formatCurrency(num) {
+        return new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(num);
+    }
+
+    calcBtn.addEventListener('click', () => {
+        const principal = parseFloat(loanAmountInput.value) || 0;
+        const totalPayments = parseFloat(loanTermInput.value) || 0; // in months
+        const annualRate = parseFloat(interestRateInput.value) || 0;
+
+        if (principal <= 0 || totalPayments <= 0) {
+            alert("Please enter a valid loan amount and loan term.");
+            return;
+        }
+
+        const monthlyRate = (annualRate / 100) / 12;
+
+        let monthlyPayment = 0;
+        let totalInterest = 0;
+        let totalCost = 0;
+
+        if (annualRate === 0) {
+            monthlyPayment = principal / totalPayments;
+            totalInterest = 0;
+            totalCost = principal;
+        } else {
+            const mathPower = Math.pow(1 + monthlyRate, totalPayments);
+            monthlyPayment = principal * (monthlyRate * mathPower) / (mathPower - 1);
+            totalCost = monthlyPayment * totalPayments;
+            totalInterest = totalCost - principal;
+        }
+
+        monthlyPaymentEl.textContent = formatCurrency(monthlyPayment);
+        totalInterestEl.textContent = "$" + formatCurrency(totalInterest);
+        totalCostEl.textContent = "$" + formatCurrency(totalCost);
+
+        resultContainer.style.display = 'block';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href]').forEach(link => {
+        if (link.hostname === window.location.hostname && link.getAttribute('href') !== '#' && !link.getAttribute('href').startsWith('javascript:')) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
+                if (wrapper) {
+                    wrapper.classList.add('page-exit');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 150);
+                } else {
+                    window.location.href = link.href;
+                }
+            });
+        }
+    });
+});

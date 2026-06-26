@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        
+        
+        <div class="calculator">
+            <!-- App Navigation -->
+
+            <!-- BMI Calculator View -->
+            <div id="bmi-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>BMI Calculator</h2>
+                    <p>Check your Body Mass Index</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Height (cm)</label>
+                        <input type="number" id="bmi-height" placeholder="e.g. 175" class="custom-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="bmi-weight" placeholder="e.g. 70" class="custom-input">
+                    </div>
+                    
+                    <button id="calc-bmi-btn" class="action-btn">Calculate BMI</button>
+                </div>
+                
+                <div class="result-container" id="bmi-result-container" style="display: none;">
+                    <div class="bmi-score" id="bmi-score">22.9</div>
+                    <div class="bmi-category" id="bmi-category">Normal Weight</div>
+                    <div class="bmi-scale">
+                        <div class="bmi-marker" id="bmi-marker"></div>
+                    </div>
+                </div>
+            </div> <!-- End BMI View -->
+        </div>
+    </div>
+    <script src="../js/bmi.js"></script>
+</body>
+</html>

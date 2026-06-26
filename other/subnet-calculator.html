@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subnet Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator" style="width: 100%; max-width: 420px;">
+
+            <div class="calc-view active">
+                <div class="calc-header">
+                    <h2>Subnet Calculator</h2>
+                    <p>Calculate network details from IP and CIDR</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>IP Address</label>
+                        <input type="text" id="ip-address" class="custom-input" placeholder="e.g. 192.168.1.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Subnet Mask / CIDR</label>
+                        <select id="subnet-mask" class="custom-input">
+                            <!-- JS will populate /1 to /32 -->
+                        </select>
+                    </div>
+                    <button id="calc-subnet-btn" class="action-btn">Calculate Subnet</button>
+                </div>
+                
+                <div class="result-container" id="subnet-result-container" style="display: none; padding: 15px;">
+                    <div class="age-details" id="subnet-details" style="text-align: left; padding: 0;">
+                        <!-- Results injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/subnet.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="calculator-wrapper">
+        <div class="calculator">
+
+            <div id="date-view" class="calc-view active">
+                <div class="calc-header">
+                    <h2>Date Calculator</h2>
+                    <p>Calculate differences or add/subtract days</p>
+                </div>
+                
+                <div class="form-box">
+                    <div class="input-group">
+                        <label>Calculation Type</label>
+                        <select id="date-calc-type" class="custom-input">
+                            <option value="difference">Difference between dates</option>
+                            <option value="add_sub">Add/Subtract to date</option>
+                        </select>
+                    </div>
+
+                    <!-- Difference Mode -->
+                    <div id="mode-difference">
+                        <div class="input-group">
+                            <label>Start Date</label>
+                            <input type="date" id="date-start" class="custom-input">
+                        </div>
+                        <div class="input-group">
+                            <label>End Date</label>
+                            <input type="date" id="date-end" class="custom-input">
+                        </div>
+                    </div>
+
+                    <!-- Add/Sub Mode -->
+                    <div id="mode-add-sub" style="display: none;">
+                        <div class="input-group">
+                            <label>Start Date</label>
+                            <input type="date" id="date-base" class="custom-input">
+                        </div>
+                        <div class="input-group" style="display: flex; gap: 10px;">
+                            <select id="date-op" class="custom-input" style="flex: 1;">
+                                <option value="add">Add (+)</option>
+                                <option value="sub">Subtract (-)</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div class="input-group" style="flex: 1;">
+                                <label>Years</label>
+                                <input type="number" id="date-years" class="custom-input" value="0" min="0">
+                            </div>
+                            <div class="input-group" style="flex: 1;">
+                                <label>Months</label>
+                                <input type="number" id="date-months" class="custom-input" value="0" min="0">
+                            </div>
+                            <div class="input-group" style="flex: 1;">
+                                <label>Days</label>
+                                <input type="number" id="date-days" class="custom-input" value="0" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="calc-date-btn" class="action-btn">Calculate</button>
+                </div>
+                
+                <div class="result-container" id="date-result-container" style="display: none;">
+                    <div class="age-main" id="date-main-result" style="font-size: 1.5rem;">
+                        Result will appear here
+                    </div>
+                    <div class="age-details" id="date-details">
+                        <!-- Extra details if any -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/date.js"></script>
+</body>
+</html>
