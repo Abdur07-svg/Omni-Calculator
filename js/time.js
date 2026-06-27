@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const calcType = document.getElementById('time-calc-type');
     const modeDifference = document.getElementById('mode-difference');
     const modeAddSub = document.getElementById('mode-add-sub');
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainResult = document.getElementById('time-main-result');
     const detailsResult = document.getElementById('time-details');
 
-    calcType.addEventListener('change', () => {
+    calcType?.addEventListener('change', () => {
         if (calcType.value === 'difference') {
             modeDifference.style.display = 'block';
             modeAddSub.style.display = 'none';
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultContainer.style.display = 'none';
     });
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         if (calcType.value === 'difference') {
             calculateDifference();
         } else {
@@ -102,4 +102,31 @@ document.addEventListener('DOMContentLoaded', () => {
         detailsResult.innerHTML = '';
         resultContainer.style.display = 'block';
     }
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

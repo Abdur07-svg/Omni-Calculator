@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     // Theme Toggle Logic
     const themeSwitch = document.getElementById('theme-switch');
     const htmlElement = document.documentElement;
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (themeSwitch) {
-        themeSwitch.addEventListener('change', () => {
+        themeSwitch?.addEventListener('change', () => {
                 if (themeSwitch.checked) {
                     htmlElement.setAttribute('data-theme', 'light');
                     localStorage.setItem('theme', 'light');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (soundToggleBtn) {
-        soundToggleBtn.addEventListener('click', () => {
+        soundToggleBtn?.addEventListener('click', () => {
             soundEnabled = !soundEnabled;
             if (soundEnabled) {
                 soundIcon.classList.remove('fa-volume-xmark');
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDeg = true;
 
     if (scientificToggleBtn) {
-        scientificToggleBtn.addEventListener('click', () => {
+        scientificToggleBtn?.addEventListener('click', () => {
             playClickSound();
             isScientific = !isScientific;
             if (isScientific) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     angleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             angleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Button event listeners
     document.querySelectorAll('.btn-number, .btn-operator, .btn-sci, .btn-action, .btn-equal').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             
             if (btn.classList.contains('btn-number')) {
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Background Blobs and Parallax (Removed parallax effect)
 
     // Keyboard Support
-    window.addEventListener('keydown', (e) => {
+    window?.addEventListener('keydown', (e) => {
         if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
             return;
         }
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calcViews = document.querySelectorAll('.calc-view');
 
     navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             // Remove active from all nav buttons and views
             navBtns.forEach(b => b.classList.remove('active'));
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bmiMarker = document.getElementById('bmi-marker');
 
     if (btnCalcBmi) {
-        btnCalcBmi.addEventListener('click', () => {
+        btnCalcBmi?.addEventListener('click', () => {
             playClickSound();
             const heightCm = parseFloat(inputBmiHeight.value);
             const weightKg = parseFloat(inputBmiWeight.value);
@@ -431,11 +431,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inputAgeTarget) {
         // Set default target date to today
         const today = new Date();
-        inputAgeTarget.value = today.toISOString().split('T')[0];
+    if (inputAgeTarget) inputAgeTarget.value = today.toISOString().split('T')[0];
     }
     
     if (btnCalcAge) {
-        btnCalcAge.addEventListener('click', () => {
+        btnCalcAge?.addEventListener('click', () => {
             playClickSound();
             if (!inputAgeDob.value || !inputAgeTarget.value) return;
             
@@ -484,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Accordion Logic for Dashboard Categories
     const categoryHeaders = document.querySelectorAll('.category-header');
     categoryHeaders.forEach(header => {
-        header.addEventListener('click', () => {
+        header?.addEventListener('click', () => {
             playClickSound();
             const card = header.closest('.category-card');
             
@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dashboard Search Functionality
     const searchInput = document.getElementById('dashboard-search');
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
+        searchInput?.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             const categories = document.querySelectorAll('.category-card');
             
@@ -540,10 +540,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDisplay();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href]').forEach(link => {
         if (link.hostname === window.location.hostname && link.getAttribute('href') !== '#' && !link.getAttribute('href').startsWith('javascript:')) {
-            link.addEventListener('click', (e) => {
+            link?.addEventListener('click', (e) => {
                 e.preventDefault();
                 const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
                 if (wrapper) {
@@ -560,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Fix for mobile back-button (bfcache): remove page-exit animation when page is restored
-window.addEventListener('pageshow', (e) => {
+window?.addEventListener('pageshow', (e) => {
     if (e.persisted) {
         const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
         if (wrapper) {
@@ -570,7 +570,7 @@ window.addEventListener('pageshow', (e) => {
 });
 
 // Global Enter-to-Calculate listener (Capture phase to run before plugins like Flatpickr)
-document.addEventListener('keydown', (e) => {
+document?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         const activeElem = document.activeElement;
         if (activeElem && (activeElem.tagName === 'INPUT' || activeElem.tagName === 'TEXTAREA')) {
@@ -593,3 +593,30 @@ document.addEventListener('keydown', (e) => {
         }
     }
 }, true);
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
+});

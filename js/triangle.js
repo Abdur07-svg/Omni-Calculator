@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const btnCalc = document.getElementById('calc-tri-btn');
     const resContainer = document.getElementById('tri-result-container');
     const details = document.getElementById('tri-details');
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toRad = (val, isDeg) => isDeg ? val * Math.PI / 180 : val;
     const degToRadStr = (val, isDeg) => isDeg ? `${parseFloat((val * 180 / Math.PI).toFixed(4))}&deg;` : `${parseFloat(val.toFixed(4))} rad`;
 
-    btnCalc.addEventListener('click', () => {
+    btnCalc?.addEventListener('click', () => {
         let a = parseFloat(inSideA.value);
         let b = parseFloat(inSideB.value);
         let c = parseFloat(inSideC.value);
@@ -85,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (a + b <= c || a + c <= b || b + c <= a) {
             errorMsg = 'Invalid triangle: The given sides or angles cannot form a closed triangle.';
         } else if (Math.abs(A + B + C - Math.PI) > 0.01) {
-            errorMsg = 'Invalid triangle: The sum of angles must equal 180 degrees.';
+            let expected = isDeg ? '180 degrees' : 'π (approx 3.14159) radians';
+            errorMsg = `Invalid triangle: The sum of angles must equal ${expected}.`;
         }
 
         if (errorMsg) {
@@ -118,5 +119,32 @@ document.addEventListener('DOMContentLoaded', () => {
         inAngleA.value = parseFloat((isDeg ? A * 180/Math.PI : A).toFixed(4));
         inAngleB.value = parseFloat((isDeg ? B * 180/Math.PI : B).toFixed(4));
         inAngleC.value = parseFloat((isDeg ? C * 180/Math.PI : C).toFixed(4));
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const calcBtn = document.getElementById('calc-concrete-btn');
     const resultContainer = document.getElementById('concrete-result-container');
     const mainResult = document.getElementById('concrete-main-result');
     const detailsResult = document.getElementById('concrete-details');
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         const length = parseFloat(document.getElementById('concrete-length').value);
         const lUnit = document.getElementById('concrete-length-unit').value;
         const width = parseFloat(document.getElementById('concrete-width').value);
@@ -49,5 +49,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>60lb Bags: <span>${bags60} bags</span></p>
         `;
         resultContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

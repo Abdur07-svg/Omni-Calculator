@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const n1In = document.getElementById('n1');
     const d1In = document.getElementById('d1');
     const n2In = document.getElementById('n2');
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return b ? gcd(b, a % b) : Math.abs(a);
     }
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         let n1 = parseInt(n1In.value);
         let d1 = parseInt(d1In.value);
         let n2 = parseInt(n2In.value);
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mixed Numbers Calculator ---
     const calcMnBtn = document.getElementById('calc-mn-btn');
     if (calcMnBtn) {
-        calcMnBtn.addEventListener('click', () => {
+        calcMnBtn?.addEventListener('click', () => {
             const w1Str = document.getElementById('mn-w1').value.trim();
             const n1 = parseInt(document.getElementById('mn-n1').value) || 0;
             const d1 = parseInt(document.getElementById('mn-d1').value) || 1;
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Simplify Fractions Calculator ---
     const calcSimpBtn = document.getElementById('calc-simp-btn');
     if (calcSimpBtn) {
-        calcSimpBtn.addEventListener('click', () => {
+        calcSimpBtn?.addEventListener('click', () => {
             const wStr = document.getElementById('simp-w').value.trim();
             const n = parseInt(document.getElementById('simp-n').value) || 0;
             const d = parseInt(document.getElementById('simp-d').value) || 1;
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Decimal to Fraction Calculator ---
     const calcD2fBtn = document.getElementById('calc-dec-to-frac-btn');
     if (calcD2fBtn) {
-        calcD2fBtn.addEventListener('click', () => {
+        calcD2fBtn?.addEventListener('click', () => {
             const valStr = document.getElementById('dec-val').value.trim();
             const resContainer = document.getElementById('d2f-result-container');
 
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Fraction to Decimal Calculator ---
     const calcF2dBtn = document.getElementById('calc-frac-to-dec-btn');
     if (calcF2dBtn) {
-        calcF2dBtn.addEventListener('click', () => {
+        calcF2dBtn?.addEventListener('click', () => {
             const n = parseFloat(document.getElementById('f2d-n').value);
             const d = parseFloat(document.getElementById('f2d-d').value);
             const resContainer = document.getElementById('f2d-result-container');
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const calcBfracBtn = document.getElementById('calc-bfrac-btn');
     if (calcBfracBtn) {
-        calcBfracBtn.addEventListener('click', () => {
+        calcBfracBtn?.addEventListener('click', () => {
             let n1Str = document.getElementById('bn1').value.trim() || '0';
             let d1Str = document.getElementById('bd1').value.trim() || '1';
             let n2Str = document.getElementById('bn2').value.trim() || '0';
@@ -377,4 +377,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

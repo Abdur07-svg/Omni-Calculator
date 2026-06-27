@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const calcBtn = document.getElementById('calc-grade-btn');
     const clearBtn = document.getElementById('clear-grade-btn');
     const addRowBtn = document.getElementById('add-row-btn');
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(addRowBtn) {
-        addRowBtn.addEventListener('click', (e) => {
+        addRowBtn?.addEventListener('click', (e) => {
             e.preventDefault();
             rowsContainer.appendChild(createRow());
         });
     }
 
     if(clearBtn) {
-        clearBtn.addEventListener('click', () => {
+        clearBtn?.addEventListener('click', () => {
             initRows();
             const goalGrade = document.getElementById('goal-grade');
             const goalWeight = document.getElementById('goal-weight');
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(calcBtn) {
-        calcBtn.addEventListener('click', () => {
+        calcBtn?.addEventListener('click', () => {
             const gradeInputs = document.querySelectorAll('.assignment-grade');
             const weightInputs = document.querySelectorAll('.assignment-weight');
             
@@ -140,4 +140,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize
     initRows();
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

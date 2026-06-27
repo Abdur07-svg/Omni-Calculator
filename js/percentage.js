@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const typeSelect = document.getElementById('pct-type');
     const valXIn = document.getElementById('val-x');
     const valYIn = document.getElementById('val-y');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainResult = document.getElementById('pct-main-result');
     const sentence = document.getElementById('pct-sentence');
 
-    typeSelect.addEventListener('change', () => {
+    typeSelect?.addEventListener('change', () => {
         const type = typeSelect.value;
         if (type === '1') {
             labelX.textContent = 'Percentage (X%)';
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         const type = typeSelect.value;
         const x = parseFloat(valXIn.value);
         const y = parseFloat(valYIn.value);
@@ -75,4 +75,31 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Trigger change on load to set correct labels
     typeSelect.dispatchEvent(new Event('change'));
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

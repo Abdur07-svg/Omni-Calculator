@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const minIn = document.getElementById('rand-min');
     const maxIn = document.getElementById('rand-max');
     const countIn = document.getElementById('rand-count');
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resContainer = document.getElementById('rand-result-container');
     const mainResult = document.getElementById('rand-main-result');
 
-    genBtn.addEventListener('click', () => {
+    genBtn?.addEventListener('click', () => {
         const min = parseInt(minIn.value);
         const max = parseInt(maxIn.value);
         let count = parseInt(countIn.value);
@@ -46,5 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         resContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

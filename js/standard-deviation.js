@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const dataInput = document.getElementById('std-data');
     const btnCalc = document.getElementById('calc-std-btn');
     const resContainer = document.getElementById('std-result-container');
     const details = document.getElementById('std-details');
 
-    btnCalc.addEventListener('click', () => {
+    btnCalc?.addEventListener('click', () => {
         const text = dataInput.value.trim();
         if (!text) {
             details.innerHTML = '<p style="color:#ef4444; border:none; justify-content:center;">Please enter some data.</p>';
@@ -55,5 +55,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <p style="padding-top: 5px;">Population SD: <span>${parseFloat(popStdDev.toFixed(5))}</span></p>
         `;
         resContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

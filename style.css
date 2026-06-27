@@ -474,9 +474,7 @@ body {
     
     .calculator.scientific-mode .keypad-wrapper {
         flex-direction: column;
-        overflow-y: auto;
-        max-height: 400px;
-        padding-right: 5px;
+        padding-right: 0;
     }
     
     .calculator.scientific-mode .scientific-keypad,
@@ -920,5 +918,39 @@ select.custom-input option {
     .form-box > div[style*="display: flex"] > select,
     .form-box > div[style*="display: flex"] > input {
         width: 100% !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .calculator.scientific-mode {
+        max-width: 100% !important;
+        padding: 10px 5px !important;
+    }
+    .calculator.scientific-mode .display-area {
+        height: 70px !important;
+        padding: 5px 10px !important;
+        min-height: 70px !important;
+    }
+    .calculator.scientific-mode #current-operand {
+        font-size: 1.5rem !important;
+    }
+    .calculator.scientific-mode #previous-operand {
+        font-size: 0.9rem !important;
+    }
+    .calculator.scientific-mode .btn {
+        height: 32px !important;
+        font-size: 0.9rem !important;
+        border-radius: 8px !important;
+    }
+    .calculator.scientific-mode .btn-sci {
+        font-size: 0.75rem !important;
+        padding: 0 !important;
+    }
+    .calculator.scientific-mode .keypad {
+        gap: 4px !important;
+    }
+    .calculator.scientific-mode .keypad-wrapper {
+        gap: 6px !important;
+        padding-right: 0 !important;
     }
 }

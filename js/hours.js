@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const calcBtn = document.getElementById('calc-hours-btn');
     const resultContainer = document.getElementById('hours-result-container');
     const mainResult = document.getElementById('hours-main-result');
     const detailsResult = document.getElementById('hours-details');
 
-    calcBtn.addEventListener('click', calculateHours);
+    calcBtn?.addEventListener('click', calculateHours);
 
     function parseTime(timeStr) {
         if (!timeStr) return null;
@@ -51,4 +51,31 @@ document.addEventListener('DOMContentLoaded', () => {
         detailsResult.innerHTML = '';
         resultContainer.style.display = 'block';
     }
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

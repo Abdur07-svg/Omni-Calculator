@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     // Theme toggle functionality
     const themeSwitch = document.getElementById('theme-switch');
     const htmlElement = document.documentElement;
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (themeSwitch) themeSwitch.checked = true;
     }
     if (themeSwitch) {
-        themeSwitch.addEventListener('change', () => {
+        themeSwitch?.addEventListener('change', () => {
                 if (themeSwitch.checked) {
                     htmlElement.setAttribute('data-theme', 'light');
                     localStorage.setItem('theme', 'light');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundBtn = document.getElementById('sound-toggle-btn');
     const soundIcon = document.getElementById('sound-icon');
     let soundEnabled = true;
-    soundBtn.addEventListener('click', () => {
+    soundBtn?.addEventListener('click', () => {
         soundEnabled = !soundEnabled;
         soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
     });
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).format(num);
     }
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         const principal = parseFloat(initialAmountInput.value) || 0;
         const monthlyContribution = parseFloat(monthlyContributionInput.value) || 0;
         const years = parseFloat(yearsGrowInput.value) || 0;
@@ -88,10 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href]').forEach(link => {
         if (link.hostname === window.location.hostname && link.getAttribute('href') !== '#' && !link.getAttribute('href').startsWith('javascript:')) {
-            link.addEventListener('click', (e) => {
+            link?.addEventListener('click', (e) => {
                 e.preventDefault();
                 const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
                 if (wrapper) {
@@ -104,5 +104,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

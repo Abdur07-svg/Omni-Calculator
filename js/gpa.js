@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const coursesContainer = document.getElementById('courses-container');
     const addCourseBtn = document.getElementById('add-course-btn');
     const calcGpaBtn = document.getElementById('calc-gpa-btn');
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize with 4 rows
     for(let i=0; i<4; i++) createCourseRow();
 
-    addCourseBtn.addEventListener('click', createCourseRow);
+    addCourseBtn?.addEventListener('click', createCourseRow);
 
-    calcGpaBtn.addEventListener('click', () => {
+    calcGpaBtn?.addEventListener('click', () => {
         let totalCredits = 0;
         let totalPoints = 0;
         const rows = document.querySelectorAll('.course-row');
@@ -93,5 +93,32 @@ document.addEventListener('DOMContentLoaded', () => {
         mainResult.innerHTML = gpa;
         detailsResult.innerHTML = `<p>Total Credits: <span>${totalCredits}</span></p><p>Total Points: <span>${totalPoints.toFixed(2)}</span></p>`;
         resultContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

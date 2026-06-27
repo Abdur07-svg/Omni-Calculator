@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('conv-category');
     const inputVal = document.getElementById('conv-input');
     const fromSelect = document.getElementById('conv-from');
@@ -98,12 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.textContent = formatted;
     }
 
-    categorySelect.addEventListener('change', populateUnits);
-    inputVal.addEventListener('input', calculate);
-    fromSelect.addEventListener('change', calculate);
-    toSelect.addEventListener('change', calculate);
+    categorySelect?.addEventListener('change', populateUnits);
+    inputVal?.addEventListener('input', calculate);
+    fromSelect?.addEventListener('change', calculate);
+    toSelect?.addEventListener('change', calculate);
 
-    swapBtn.addEventListener('click', () => {
+    swapBtn?.addEventListener('click', () => {
         const temp = fromSelect.value;
         fromSelect.value = toSelect.value;
         toSelect.value = temp;
@@ -112,4 +112,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init
     populateUnits();
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

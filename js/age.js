@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     // Theme Toggle Logic
     const themeSwitch = document.getElementById('theme-switch');
     const htmlElement = document.documentElement;
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (themeSwitch) {
-        themeSwitch.addEventListener('change', () => {
+        themeSwitch?.addEventListener('change', () => {
                 if (themeSwitch.checked) {
                     htmlElement.setAttribute('data-theme', 'light');
                     localStorage.setItem('theme', 'light');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (soundToggleBtn) {
-        soundToggleBtn.addEventListener('click', () => {
+        soundToggleBtn?.addEventListener('click', () => {
                 soundEnabled = !soundEnabled;
                 if (soundEnabled) {
                     soundIcon.classList.remove('fa-volume-xmark');
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDeg = true;
 
     if (scientificToggleBtn) {
-        scientificToggleBtn.addEventListener('click', () => {
+        scientificToggleBtn?.addEventListener('click', () => {
                 playClickSound();
                 isScientific = !isScientific;
                 if (isScientific) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     angleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             angleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Button event listeners
     document.querySelectorAll('.btn-number, .btn-operator, .btn-sci, .btn-action, .btn-equal').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             
             if (btn.classList.contains('btn-number')) {
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Background Blobs and Parallax (Removed parallax effect)
 
     // Keyboard Support
-    window.addEventListener('keydown', (e) => {
+    window?.addEventListener('keydown', (e) => {
         if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
             if (e.key === 'Enter') {
                 const activeElem = document.activeElement;
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calcViews = document.querySelectorAll('.calc-view');
 
     navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn?.addEventListener('click', () => {
             playClickSound();
             // Remove active from all nav buttons and views
             navBtns.forEach(b => b.classList.remove('active'));
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bmiMarker = document.getElementById('bmi-marker');
 
     if (btnCalcBmi) {
-        btnCalcBmi.addEventListener('click', () => {
+        btnCalcBmi?.addEventListener('click', () => {
                 playClickSound();
                 const heightCm = parseFloat(inputBmiHeight.value);
                 const weightKg = parseFloat(inputBmiWeight.value);
@@ -441,17 +441,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set default target date to today (MM/DD/YYYY)
     const today = new Date();
-    inputAgeTarget.value = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+    if (inputAgeTarget) inputAgeTarget.value = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
     
     if (typeof flatpickr !== 'undefined') {
         flatpickr(".date-input", {
             dateFormat: "m/d/Y",
-            allowInput: true
+            allowInput: true,
+            disableMobile: "true"
         });
     }
     
     if (btnCalcAge) {
-        btnCalcAge.addEventListener('click', () => {
+        btnCalcAge?.addEventListener('click', () => {
                 playClickSound();
                 if (!inputAgeDob.value || !inputAgeTarget.value) return;
                 
@@ -500,10 +501,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDisplay();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href]').forEach(link => {
         if (link.hostname === window.location.hostname && link.getAttribute('href') !== '#' && !link.getAttribute('href').startsWith('javascript:')) {
-            link.addEventListener('click', (e) => {
+            link?.addEventListener('click', (e) => {
                 e.preventDefault();
                 const wrapper = document.querySelector('.calculator-wrapper') || document.querySelector('.dashboard-wrapper');
                 if (wrapper) {
@@ -516,5 +517,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

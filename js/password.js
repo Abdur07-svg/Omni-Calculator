@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const lengthSlider = document.getElementById('password-length');
     const lengthVal = document.getElementById('length-val');
     const chkUpper = document.getElementById('inc-uppercase');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-='
     };
 
-    lengthSlider.addEventListener('input', () => {
+    lengthSlider?.addEventListener('input', () => {
         lengthVal.textContent = lengthSlider.value;
     });
 
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordDisplay.style.color = 'var(--calc-accent)';
     }
 
-    generateBtn.addEventListener('click', generatePassword);
+    generateBtn?.addEventListener('click', generatePassword);
 
-    copyBtn.addEventListener('click', () => {
+    copyBtn?.addEventListener('click', () => {
         const text = passwordDisplay.textContent;
         if (text && text !== 'Click generate' && text !== 'Select at least one option') {
             navigator.clipboard.writeText(text).then(() => {
@@ -63,4 +63,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generate on load
     generatePassword();
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
+    });
 });

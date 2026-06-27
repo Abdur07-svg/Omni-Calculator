@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const ipInput = document.getElementById('ip-address');
     const maskSelect = document.getElementById('subnet-mask');
     const calcBtn = document.getElementById('calc-subnet-btn');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ].join('.');
     }
 
-    calcBtn.addEventListener('click', () => {
+    calcBtn?.addEventListener('click', () => {
         const ipStr = ipInput.value.trim();
         const cidr = parseInt(maskSelect.value);
         
@@ -69,5 +69,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <p style="padding-top: 5px;">Total Usable Hosts: <span>${usableHosts.toLocaleString()}</span></p>
         `;
         resultContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });

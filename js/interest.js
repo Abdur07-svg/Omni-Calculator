@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const prinIn = document.getElementById('int-principal');
     const rateIn = document.getElementById('int-rate');
     const timeIn = document.getElementById('int-time');
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const intOut = document.getElementById('int-total');
     const details = document.getElementById('int-details');
 
-    btnCalc.addEventListener('click', () => {
+    btnCalc?.addEventListener('click', () => {
         const principal = parseFloat(prinIn.value) || 0;
         const rate = parseFloat(rateIn.value) || 0;
         const time = parseFloat(timeIn.value) || 0;
@@ -28,5 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <p style="padding-top: 5px;">Total Amount: <span>$${totalAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span></p>
         `;
         resContainer.style.display = 'block';
+    });
+});
+
+
+// Global Enter key listener for all input fields to trigger the calculate button
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') return;
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const calculatorDiv = input.closest('.calculator');
+                let calcBtn = null;
+                if (calculatorDiv) {
+                    calcBtn = calculatorDiv.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (!calcBtn) {
+                    calcBtn = document.querySelector('button.action-btn, button[id^="calc-"]');
+                }
+                
+                if (calcBtn) {
+                    calcBtn.click();
+                }
+            }
+        });
     });
 });
